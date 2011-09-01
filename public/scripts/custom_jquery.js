@@ -1,3 +1,3 @@
 $(document).bind("mobileinit", function(){
-  $.mobile.ajaxEnabled = true;
+  $.mobile.ajaxEnabled = false;
 });

@@ -20,8 +20,8 @@
 <div data-role="page" id="main" data-theme="a"> 
  
     <div data-role="header"> 
-        <a href="#main" data-icon="home">Home</a>
-		<a href="#graph" data-role="button" data-icon="grid">Graph</a>    
+        <a href="#main" data-role="button">Home</a>
+		<a href="#graph" data-role="button">Graph</a>    
         <h1>Weight Watch</h1> 
     </div><!-- /header --> 
  
@@ -31,7 +31,7 @@
         <ul data-role="listview" id="weight" data-inset="true" data-theme="a"></ul>  
             
         
-        <p><a href="#graph" data-role="button">Show graph</a></p>
+        <p><a href="#addWeight" data-role="button" data-inline="true" data-icon="plus" data-rel="dialog" data-transistion="pop">Add</a></p>
     </div><!-- /content --> 
     
     <div data-role="footer" data-theme="a"> 
@@ -43,8 +43,7 @@
 <div data-role="page" id="graph" data-theme="a"> 
  
     <div data-role="header"> 
-        <a href="#main" data-icon="home">Home</a>
-        <a href="#main" data-role="button" data-icon="arrow-l">Data entry</a>    
+        <a href="#main">Back</a>
         <h1>Graph</h1> 
     </div><!-- /header --> 
  
@@ -59,6 +58,34 @@
     <div data-role="footer"> 
     </div><!-- /footer --> 
 </div><!-- /page graph --> 
+ 
+ <div data-role="page" id="addWeight" data-theme="a">
+ 	<div data-role="header">
+ 		<a href="#main">Close</a>
+		<h1>Add weight entry</h1>
+ 	</div>
+	<div data-role="content" data-theme="a">
+		 <form id="weighin" action="#">
+     
+         <div data-role="fieldcontain">
+            <label for="weighindate">Date:</label>
+            <input type="date" name="weighindate" id="weighindate" value=""  />
+        </div>
+      
+        <div data-role="fieldcontain">
+            <label for="weight">Weight:</label>
+            <input type="number" name="weighinweight" id="weighinweight" value="" />
+        </div>
+ 
+        <div data-role="fieldcontain">
+            <button type="submit" data-theme="a" data-inline="true">Cancel</button>
+            <button type="submit" data-theme="a" data-inline="true">Save</button>     
+        </div>
+		</form>
+	</div>
+    <div data-role="footer"> 
+    </div><!-- /footer --> 
+ </div>
  
 </body> 
 </html> 

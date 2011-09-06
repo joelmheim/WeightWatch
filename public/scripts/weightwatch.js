@@ -2,14 +2,24 @@ var weightwatch = {};
 
 (function(ns) {
 	ns.weightRepository = function() {
-		var weights = [
-                        {dato: new Date(2011, 1, 1, 0, 0, 0, 0), weight: 94.2},
-                        {dato: new Date(2011, 2, 25, 0, 0, 0, 0), weight: 95.4},
-                        {dato: new Date(2011, 4, 15, 0, 0, 0, 0), weight: 97.1},
-                        {dato: new Date(2011, 6, 20, 0, 0, 0, 0), weight: 104.2},
-                        {dato: new Date(2011, 8, 27, 0, 0, 0, 0), weight: 100.5}
-                      ];
-		return {
+		var weights = [];
+		var weights_key = "weightwatch.weighter";
+		
+        var saveData = function () {
+            localStorage.setItem(weights_key, JSON.stringify(weights));
+        }
+        
+        if (localStorage.getItem(weights_key) !== null) {
+            weights = JSON.parse(localStorage.getItem(weights_key));
+        }
+
+        return {
+            addWeight: function(weight) {
+                if(typeof weight !== "undefined") {
+                    weights.push(weight);
+                    saveData();
+                } 
+            },
 			getWeights: function(callback) {
 				if (typeof callback  === 'function') {
 					callback(weights);
@@ -27,26 +37,40 @@ $(document).ready(function () {
 		drawGraph(weights);
 	});
 	
+    $('#weighin').submit(function() {
+        var weight = { 'date': $('#weighindate').val(), 'weight': $('#weighinweight').val()};
+        weightwatch.weightRepository().addWeight(weight);
+    });
+
+
 	function drawGraph(data) {
         var d = [];
         
-		$(data).each( function () {
-			var entry = this; 
-            d.push([entry.dato, entry.weight]);
-        });
+		if (data.length > 0) {
+    		$(data).each( function () {
+				var entry = this;
+				d.push([ new Date(entry['date']), entry['weight']]);
+	        });
+		}
 		
         $.plot($("#placeholder"), [d], { xaxis: { mode: "time" } });
     };
     
      function populateList(data) {
-        $(data).each( function () {
-            var entry = this; 
-            $("#weight").append("<li data-role=\"list-divider\">" + entry.dato + "</li>");
-            $("#weight").append("<li>" + entry.weight + "</li>");
-        });  
+	 	if (data.length > 0) {
+	        $(data).each( function () {
+                var entry = this; 
+	            $("#weight").append("<li data-role=\"list-divider\">" + entry['date'] + "</li>");
+	            $("#weight").append("<li>" + entry['weight'] + "</li>");
+	        });  
+    	} else {
+                $("#weight").append("<li data-role=\"list-divider\"> No entry </li>");
+                $("#weight").append("<li> Add a weight by clicking the Add button below </li>");
+		}
     };
     
-
+    function addWeightEntry() {
+		
+	}
 });
-
 

@@ -20,18 +20,17 @@
 <div data-role="page" id="main" data-theme="a"> 
  
     <div data-role="header"> 
-        <a href="#main" data-role="button">Home</a>
-		<a href="#graph" data-role="button">Graph</a>    
+        <a href="#main" data-role="button" data-icon="home">Home</a>
         <h1>Weight Watch</h1> 
     </div><!-- /header --> 
  
-    <div data-role="content" id="one">  
-        <h2>Data entry</h2> 
-        
-        <ul data-role="listview" id="weight" data-inset="true" data-theme="a"></ul>  
-            
-        
-        <p><a href="#addWeight" data-role="button" data-inline="true" data-icon="plus" data-rel="dialog" data-transistion="pop">Add</a></p>
+    <div data-role="content" data-theme="a">    
+        <h2>Your weight over time: </h2> 
+        <div id="placeholder" style="width:600px;height:300px;"></div> 
+ 
+        <p><a href="#addWeight" data-role="button" data-icon="plus" data-rel="dialog" data-transistion="pop">Add weight entry</a></p>
+        <p><a href="#weightdata" data-role="button" data-icon="list">Edit weight data</a></p>
+ 
     </div><!-- /content --> 
     
     <div data-role="footer" data-theme="a"> 
@@ -40,28 +39,28 @@
  
  
 <!-- Start of second page: #graph --> 
-<div data-role="page" id="graph" data-theme="a"> 
+<div data-role="page" id="weightdata" data-theme="a"> 
  
     <div data-role="header"> 
-        <a href="#main">Back</a>
-        <h1>Graph</h1> 
+        <a href="#main" data-icon="back">Back</a>
+        <h1>Weight data</h1> 
     </div><!-- /header --> 
  
-    <div data-role="content" data-theme="a">    
-        <h2>Graph</h2> 
-        <div id="placeholder" style="width:600px;height:300px;"></div> 
- 
-        <p>Your weight over time.</p> 
- 
+     <div data-role="content" id="one">  
+        <h2>Weight list: </h2> 
+        
+        <ul data-role="listview" id="weight" data-inset="true" data-theme="a"></ul>  
+            
+        <p><a href="#addWeight" data-role="button" data-inline="true" data-icon="plus" data-rel="dialog" data-transistion="pop">Add</a></p>
     </div><!-- /content --> 
     
-    <div data-role="footer"> 
+   <div data-role="footer"> 
     </div><!-- /footer --> 
 </div><!-- /page graph --> 
  
  <div data-role="page" id="addWeight" data-theme="a">
  	<div data-role="header">
- 		<a href="#main">Close</a>
+ 		<a href="#main" data-icon="close">Close</a>
 		<h1>Add weight entry</h1>
  	</div>
 	<div data-role="content" data-theme="a">
@@ -74,7 +73,10 @@
       
         <div data-role="fieldcontain">
             <label for="weight">Weight:</label>
-            <input type="number" name="weighinweight" id="weighinweight" value="" />
+            <input type="number" name="weighinweight" id="weighinweight" value="" 
+			        min="0"
+                    max="999"
+                    step="0.1" />
         </div>
  
         <div data-role="fieldcontain">

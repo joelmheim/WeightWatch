@@ -11,12 +11,30 @@ var weightwatch = {};
         
         if (localStorage.getItem(weights_key) !== null) {
             weights = JSON.parse(localStorage.getItem(weights_key));
+			weights.sort(function(a, b) {
+                if (a['date'] < b['date']) {
+                    return -1;
+                } else if (a['date'] > b['date']) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
         }
 
         return {
             addWeight: function(weight) {
                 if(typeof weight !== "undefined") {
                     weights.push(weight);
+					weights.sort(function(a, b) {
+                                    if (a['date'] < b['date']) {
+                                        return -1;
+                                    } else if (a['date'] > b['date']) {
+                                        return 1;
+                                    } else {
+                                        return 0;
+                                    }
+                    });
                     saveData();
                 } 
             },
@@ -73,4 +91,3 @@ $(document).ready(function () {
 		
 	}
 });
-
